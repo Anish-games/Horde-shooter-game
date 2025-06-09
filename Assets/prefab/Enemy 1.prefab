@@ -3266,10 +3266,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3739391089329969916}
   - component: {fileID: 3739391089329969914}
-  - component: {fileID: 3739391089329969917}
   - component: {fileID: 3739391089329969915}
   - component: {fileID: 3739391089329969919}
   - component: {fileID: 1311537039}
+  - component: {fileID: 2135593764}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -3342,19 +3342,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 16
   m_CollisionDetection: 0
---- !u!65 &3739391089329969917
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3739391089329969912}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 3.0456934, y: 4.3674917, z: 2.3367577}
-  m_Center: {x: -0.033162594, y: 2.2240362, z: -0.027738094}
 --- !u!95 &3739391089329969915
 Animator:
   serializedVersion: 5
@@ -3388,7 +3375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3739391089329969914}
-  speed: 5
+  speed: 3
   animator: {fileID: 3739391089329969915}
   damage: 1
 --- !u!65 &1311537039
@@ -3402,8 +3389,22 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 2.04, y: 0.16, z: 2.23}
-  m_Center: {x: -0.04, y: 2.39, z: 2.07}
+  m_Size: {x: 0.3598824, y: 0.1599998, z: 1.793117}
+  m_Center: {x: 0, y: 2.39, z: 1.86}
+--- !u!136 &2135593764
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3739391089329969912}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 1
+  m_Height: 4.860378
+  m_Direction: 1
+  m_Center: {x: -0.03316259, y: 2.293982, z: -0.2182178}
 --- !u!1 &3739391089344015606
 GameObject:
   m_ObjectHideFlags: 0

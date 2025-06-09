@@ -16,7 +16,7 @@ public class enemyController : MonoBehaviour
 
     void Start()
     {
-        target = FindObjectOfType<PlayerController>().transform;
+        target = playerHealthController.instance.transform;
         rb.freezeRotation = true;
         speed = speed * Random.Range(0.50f, 1.5f);
     }
