@@ -120,9 +120,11 @@ public class enemyController : MonoBehaviour
         health -= Take_A_Damage;
 
         if (health <= 0)
-        { 
+        {
             Destroy(gameObject);
         }
+
+        DamageNumerController.Instance.SpawnDamage(Take_A_Damage, transform.position);
     }
 
     public void takeDamage(float Take_A_Damage, bool shouldKnockback)
