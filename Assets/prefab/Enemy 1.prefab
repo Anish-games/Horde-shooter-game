@@ -1469,7 +1469,7 @@ GameObject:
   - component: {fileID: 3739391088820775741}
   m_Layer: 0
   m_Name: Enemy 1
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3272,7 +3272,7 @@ GameObject:
   - component: {fileID: 2135593764}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3378,6 +3378,7 @@ MonoBehaviour:
   speed: 3
   animator: {fileID: 3739391089329969915}
   damage: 1
+  health: 5
 --- !u!65 &1311537039
 BoxCollider:
   m_ObjectHideFlags: 0
