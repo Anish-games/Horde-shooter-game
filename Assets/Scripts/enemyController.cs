@@ -10,6 +10,8 @@ public class enemyController : MonoBehaviour
     public Animator animator;
     public float damage;
 
+    public int expToGive = 1;
+
     // Flags to ensure actions are only triggered once per attack cycle
     private bool isAttacking = false;
     private bool damageDealt = false;
@@ -120,9 +122,13 @@ public class enemyController : MonoBehaviour
         health -= Take_A_Damage;
 
         if (health <= 0)
-        { 
+        {
             Destroy(gameObject);
+
+            ExperienceLevelController.instance.SpawnExp(transform.position , expToGive);
         }
+
+        DamageNumerController.Instance.SpawnDamage(Take_A_Damage, transform.position);
     }
 
     public void takeDamage(float Take_A_Damage, bool shouldKnockback)
