@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
     public Vector3 InputKey;
     float Myfloat;
 
+    public float pickupRange = 1.5f;
+    public float moveSpeed;
     void Update()
     {
         ////////////Move With WASD
