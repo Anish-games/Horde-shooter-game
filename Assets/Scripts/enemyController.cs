@@ -10,9 +10,16 @@ public class enemyController : MonoBehaviour
     public Animator animator;
     public float damage;
 
+    public int expToGive = 1;
+
     // Flags to ensure actions are only triggered once per attack cycle
     private bool isAttacking = false;
     private bool damageDealt = false;
+
+    public float health = 5f;
+
+    public float knockBackTime = .5f;
+    private float knockCounter;
 
     void Start()
     {
@@ -23,6 +30,21 @@ public class enemyController : MonoBehaviour
 
     void Update()
     {
+        if (knockCounter > 0)
+        {
+            knockCounter -= Time.deltaTime;
+
+            if (speed > 0)
+            {
+                speed = -speed * 2f;
+            }
+
+            if (knockCounter <= 0)
+            {
+                speed = Mathf.Abs (speed * 0.5f);
+            }
+        }
+
         if (!isAttacking)
         {
             ChasePlayer();
@@ -45,7 +67,7 @@ public class enemyController : MonoBehaviour
             // Apply damage only if it hasn't been dealt during this cycle.
             if (!damageDealt)
             {
-                Debug.Log("Player hit by detection collider – reducing health!");
+                //Debug.Log("Player hit by detection collider – reducing health!");
                 playerHealthController.instance.TakeDamage(damage);
                 damageDealt = true; // Ensure damage is applied only once per entry.
             }
@@ -53,14 +75,14 @@ public class enemyController : MonoBehaviour
             // Trigger attack if not already in an attack sequence.
             if (!isAttacking)
             {
-                Debug.Log("Player detected – selecting attack!");
+                //Debug.Log("Player detected – selecting attack!");
                 isAttacking = true;
                 rb.velocity = Vector3.zero;
                 rb.isKinematic = true;
 
                 int randomAttack = Random.Range(0, 2); // Randomly pick 0 or 1.
                 animator.SetInteger("AttackIndex", randomAttack);
-                Debug.Log("Selected AttackIndex: " + randomAttack);
+                //Debug.Log("Selected AttackIndex: " + randomAttack);
 
                 animator.SetBool("isAttacking", true); // Tell the Animator to switch to an attack state.
                 StartCoroutine(ResetAttack());
@@ -79,7 +101,7 @@ public class enemyController : MonoBehaviour
         float distance = Vector3.Distance(transform.position, target.position);
         if (distance > 2f)
         {
-            Debug.Log("Player moved away – resuming chase!");
+            //Debug.Log("Player moved away – resuming chase!");
             animator.Play("Move"); // Switch back to move animation.
             rb.velocity = (target.position - transform.position).normalized * speed;
         }
@@ -91,7 +113,31 @@ public class enemyController : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             damageDealt = false;
-            Debug.Log("Player exited detection collider – damage reset.");
+            //Debug.Log("Player exited detection collider – damage reset.");
+        }
+    }
+
+    public void takeDamage(float Take_A_Damage)
+    {
+        health -= Take_A_Damage;
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+
+            ExperienceLevelController.instance.SpawnExp(transform.position , expToGive);
+        }
+
+        DamageNumerController.Instance.SpawnDamage(Take_A_Damage, transform.position);
+    }
+
+    public void takeDamage(float Take_A_Damage, bool shouldKnockback)
+    {
+        takeDamage(Take_A_Damage);
+
+        if (shouldKnockback == true)
+        {
+            knockCounter = knockBackTime;
         }
     }
 }
